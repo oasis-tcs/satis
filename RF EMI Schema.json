@@ -1,0 +1,453 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://example.org/stix/extensions/rf-emi/1.0.0/schema.json",
+  "title": "RF Electromagnetic Interference STIX 2.1 Extension",
+  "description": "Schema defining STIX 2.1 objects for RF telemetry, anomalies, and spacecraft transponders.",
+  "oneOf": [
+    {
+      "$ref": "#/definitions/x_telemetry"
+    },
+    {
+      "$ref": "#/definitions/x_anomaly"
+    },
+    {
+      "$ref": "#/definitions/x_transponder"
+    }
+  ],
+  "definitions": {
+    "identifier": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+--[0-9a-fA-F-]{36}$"
+    },
+
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+
+    "frequency_band": {
+      "type": "string",
+      "description": "Open vocabulary identifying the RF frequency band. Examples include uhf, l-band, s-band, c-band, x-band, ku-band, and ka-band."
+    },
+
+    "x_telemetry": {
+      "type": "object",
+      "title": "RF Telemetry",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "spec_version",
+        "id",
+        "created",
+        "modified",
+        "name",
+        "observation_start",
+        "frequency_band",
+        "telemetry_source_ref"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "x-telemetry"
+        },
+        "spec_version": {
+          "type": "string",
+          "const": "2.1"
+        },
+        "id": {
+          "$ref": "#/definitions/identifier"
+        },
+        "created_by_ref": {
+          "$ref": "#/definitions/identifier"
+        },
+        "created": {
+          "$ref": "#/definitions/timestamp"
+        },
+        "modified": {
+          "$ref": "#/definitions/timestamp"
+        },
+        "revoked": {
+          "type": "boolean"
+        },
+        "labels": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "confidence": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "lang": {
+          "type": "string"
+        },
+        "external_references": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object"
+          }
+        },
+        "object_marking_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/identifier"
+          }
+        },
+        "granular_markings": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object"
+          }
+        },
+        "extensions": {
+          "type": "object"
+        },
+
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string"
+        },
+        "observation_start": {
+          "$ref": "#/definitions/timestamp"
+        },
+        "observation_end": {
+          "$ref": "#/definitions/timestamp"
+        },
+        "frequency_hz": {
+          "type": "number",
+          "minimum": 0
+        },
+        "frequency_band": {
+          "$ref": "#/definitions/frequency_band"
+        },
+        "bandwidth_hz": {
+          "type": "number",
+          "minimum": 0
+        },
+        "signal_strength_dbm": {
+          "type": "number"
+        },
+        "signal_to_noise_db": {
+          "type": "number"
+        },
+        "polarization": {
+          "type": "string"
+        },
+        "modulation": {
+          "type": "string"
+        },
+        "telemetry_source_ref": {
+          "type": "string",
+          "pattern": "^infrastructure--[0-9a-fA-F-]{36}$"
+        },
+        "asset_ref": {
+          "type": "string",
+          "pattern": "^x-asset--[0-9a-fA-F-]{36}$"
+        },
+        "transponder_ref": {
+          "type": "string",
+          "pattern": "^x-transponder--[0-9a-fA-F-]{36}$"
+        }
+      }
+    },
+
+    "x_anomaly": {
+      "type": "object",
+      "title": "Anomaly",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "spec_version",
+        "id",
+        "created",
+        "modified",
+        "name",
+        "anomaly_type",
+        "first_observed",
+        "frequency_band",
+        "orbit"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "x-anomaly"
+        },
+        "spec_version": {
+          "type": "string",
+          "const": "2.1"
+        },
+        "id": {
+          "$ref": "#/definitions/identifier"
+        },
+        "created_by_ref": {
+          "$ref": "#/definitions/identifier"
+        },
+        "created": {
+          "$ref": "#/definitions/timestamp"
+        },
+        "modified": {
+          "$ref": "#/definitions/timestamp"
+        },
+        "revoked": {
+          "type": "boolean"
+        },
+        "labels": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "confidence": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "lang": {
+          "type": "string"
+        },
+        "external_references": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object"
+          }
+        },
+        "object_marking_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/identifier"
+          }
+        },
+        "granular_markings": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object"
+          }
+        },
+        "extensions": {
+          "type": "object"
+        },
+
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string"
+        },
+
+        "anomaly_type": {
+          "type": "string",
+          "description": "Open vocabulary describing the anomaly. For RF EMI this may use rf-interference."
+        },
+
+        "first_observed": {
+          "$ref": "#/definitions/timestamp"
+        },
+        "last_observed": {
+          "$ref": "#/definitions/timestamp"
+        },
+
+        "frequency_band": {
+          "$ref": "#/definitions/frequency_band"
+        },
+        "frequency_hz": {
+          "type": "number",
+          "minimum": 0
+        },
+
+        "orbit": {
+          "type": "string",
+          "description": "Orbit or orbital regime associated with the affected spacecraft."
+        },
+
+        "orbital_altitude_km": {
+          "type": "number",
+          "minimum": 0
+        },
+
+        "latitude": {
+          "type": "number",
+          "minimum": -90,
+          "maximum": 90
+        },
+
+        "longitude": {
+          "type": "number",
+          "minimum": -180,
+          "maximum": 180
+        },
+
+        "tle_before": {
+          "type": "string"
+        },
+
+        "tle_after": {
+          "type": "string"
+        },
+
+        "interference_type": {
+          "type": "string",
+          "description": "Open vocabulary describing the RF interference mechanism or classification."
+        },
+
+        "frequency_offset_hz": {
+          "type": "number"
+        },
+
+        "signal_strength_change_db": {
+          "type": "number"
+        },
+
+        "snr_change_db": {
+          "type": "number"
+        },
+
+        "noise_floor_change_db": {
+          "type": "number"
+        },
+
+        "bandwidth_hz": {
+          "type": "number",
+          "minimum": 0
+        },
+
+        "severity": {
+          "type": "string",
+          "description": "Open vocabulary describing assessed anomaly severity."
+        }
+      }
+    },
+
+    "x_transponder": {
+      "type": "object",
+      "title": "Spacecraft Transponder",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "spec_version",
+        "id",
+        "created",
+        "modified",
+        "name",
+        "frequency_band",
+        "asset_ref"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "x-transponder"
+        },
+        "spec_version": {
+          "type": "string",
+          "const": "2.1"
+        },
+        "id": {
+          "$ref": "#/definitions/identifier"
+        },
+        "created_by_ref": {
+          "$ref": "#/definitions/identifier"
+        },
+        "created": {
+          "$ref": "#/definitions/timestamp"
+        },
+        "modified": {
+          "$ref": "#/definitions/timestamp"
+        },
+        "revoked": {
+          "type": "boolean"
+        },
+        "labels": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "confidence": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "lang": {
+          "type": "string"
+        },
+        "external_references": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object"
+          }
+        },
+        "object_marking_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/identifier"
+          }
+        },
+        "granular_markings": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object"
+          }
+        },
+        "extensions": {
+          "type": "object"
+        },
+
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string"
+        },
+        "transponder_id": {
+          "type": "string"
+        },
+        "frequency_band": {
+          "$ref": "#/definitions/frequency_band"
+        },
+        "uplink_frequency_hz": {
+          "type": "number",
+          "minimum": 0
+        },
+        "downlink_frequency_hz": {
+          "type": "number",
+          "minimum": 0
+        },
+        "bandwidth_hz": {
+          "type": "number",
+          "minimum": 0
+        },
+        "polarization": {
+          "type": "string"
+        },
+        "modulation": {
+          "type": "string"
+        },
+        "operational_status": {
+          "type": "string"
+        },
+        "asset_ref": {
+          "type": "string",
+          "pattern": "^x-asset--[0-9a-fA-F-]{36}$"
+        }
+      }
+    }
+  }
+}
