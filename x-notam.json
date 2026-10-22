@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "x-notam.schema.json",
+  "title": "x-notam",
+  "description": "A STIX 2.1 SDO representing a Notice to Air Missions associated with launch or space-related operations.",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "const": "x-notam"
+    },
+    "spec_version": {
+      "type": "string",
+      "const": "2.1"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^x-notam--[0-9a-fA-F-]{36}$"
+    },
+    "created_by_ref": {
+      "type": "string",
+      "pattern": "^identity--[0-9a-fA-F-]{36}$"
+    },
+    "created": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "modified": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "description": {
+      "type": "string"
+    },
+    "notam_id": {
+      "type": "string",
+      "description": "Identifier assigned to the NOTAM."
+    },
+    "icao_code": {
+      "type": "string",
+      "description": "ICAO location or facility code associated with the NOTAM."
+    },
+    "external_references": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "object_marking_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "type",
+    "spec_version",
+    "id",
+    "created",
+    "modified",
+    "name",
+    "notam_id",
+    "icao_code"
+  ],
+  "additionalProperties": true
+}
