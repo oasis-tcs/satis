@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "x-space-weather-event.schema.json",
+  "title": "x-space-weather-event",
+  "description": "A STIX 2.1 SDO representing a space weather event capable of affecting space or terrestrial systems.",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "const": "x-space-weather-event"
+    },
+    "spec_version": {
+      "type": "string",
+      "const": "2.1"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^x-space-weather-event--[0-9a-fA-F-]{36}$"
+    },
+    "created_by_ref": {
+      "type": "string",
+      "pattern": "^identity--[0-9a-fA-F-]{36}$"
+    },
+    "created": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "modified": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "description": {
+      "type": "string"
+    },
+    "event_type": {
+      "type": "string",
+      "description": "Type of space weather event, such as cme or solar-flare."
+    },
+    "wind_speed_km_s": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Measured or estimated solar wind or CME speed in kilometers per second."
+    },
+    "impact_time": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Estimated or observed time at which the event impacts the relevant environment or system."
+    },
+    "kp_index": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 9,
+      "description": "Planetary Kp geomagnetic activity index."
+    },
+    "flare_class": {
+      "type": "string",
+      "description": "Solar flare classification when applicable."
+    },
+    "halo_cme": {
+      "type": "boolean",
+      "description": "Indicates whether a coronal mass ejection is classified as a halo CME."
+    },
+    "solar_radiation": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Reported solar radiation measurement."
+    },
+    "total_electron_count": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Reported total electron count measurement."
+    },
+    "external_references": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "object_marking_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "type",
+    "spec_version",
+    "id",
+    "created",
+    "modified",
+    "name",
+    "event_type"
+  ],
+  "additionalProperties": true
+}

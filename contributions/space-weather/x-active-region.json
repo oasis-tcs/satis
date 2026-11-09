@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "x-active-region.schema.json",
+  "title": "x-active-region",
+  "description": "A STIX 2.1 SDO representing an active region on the Sun associated with space weather activity.",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "const": "x-active-region"
+    },
+    "spec_version": {
+      "type": "string",
+      "const": "2.1"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^x-active-region--[0-9a-fA-F-]{36}$"
+    },
+    "created_by_ref": {
+      "type": "string",
+      "pattern": "^identity--[0-9a-fA-F-]{36}$"
+    },
+    "created": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "modified": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "description": {
+      "type": "string"
+    },
+    "active_region_number": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Assigned identifier for the active solar region."
+    },
+    "external_references": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "object_marking_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "type",
+    "spec_version",
+    "id",
+    "created",
+    "modified",
+    "name",
+    "active_region_number"
+  ],
+  "additionalProperties": true
+}
