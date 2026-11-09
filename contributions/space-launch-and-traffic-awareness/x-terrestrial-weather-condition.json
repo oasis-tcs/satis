@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "x-terrestrial-weather-condition.schema.json",
+  "title": "x-terrestrial-weather-condition",
+  "description": "A STIX 2.1 SDO representing terrestrial weather conditions relevant to space operations.",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "const": "x-terrestrial-weather-condition"
+    },
+    "spec_version": {
+      "type": "string",
+      "const": "2.1"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^x-terrestrial-weather-condition--[0-9a-fA-F-]{36}$"
+    },
+    "created_by_ref": {
+      "type": "string",
+      "pattern": "^identity--[0-9a-fA-F-]{36}$"
+    },
+    "created": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "modified": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "description": {
+      "type": "string"
+    },
+    "temperature_celsius": {
+      "type": "number",
+      "description": "Observed air temperature in degrees Celsius."
+    },
+    "wind_speed_km_h": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Observed wind speed in kilometers per hour."
+    },
+    "visibility_km": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Observed visibility in kilometers."
+    },
+    "precipitation": {
+      "type": "string",
+      "description": "Type or description of observed precipitation."
+    },
+    "external_references": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "object_marking_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "type",
+    "spec_version",
+    "id",
+    "created",
+    "modified",
+    "name"
+  ],
+  "additionalProperties": true
+}
